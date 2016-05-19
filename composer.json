@@ -8,6 +8,7 @@
       "url": "https://github.com/Kaustik/github-php-client.git"
     }],
   "require": {
+    "symfony/framework-bundle": "~2.3|~3.0",
     "tan-tan-kanarek/github-php-client" : "dev-master",
     "symfony/console": "3.*"
   },
