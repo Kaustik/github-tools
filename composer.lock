@@ -4,9 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0eaa369fc88e77ce616cbc7116cec240",
-    "content-hash": "9f8177e61be6d6e5d0e2e3e2918ac98d",
+    "hash": "fe08ca7b0285cea751b478eceab67967",
+    "content-hash": "0353dc9d0bc5f828ccd2091a3da0a2b6",
     "packages": [
+        {
+            "name": "PhUML",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Kaustik/phuml.git",
+                "reference": "53c043eb01e75cbe228f674a5356340c1d2c9b94"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*",
+                "symfony/console": "3.*"
+            },
+            "type": "system",
+            "autoload": {
+                "psr-4": {
+                    "Phuml\\": "src",
+                    "Test\\": "tests"
+                },
+                "classmap": [
+                    "src/classes",
+                    "src/interfaces",
+                    "src/exceptions"
+                ]
+            },
+            "license": [
+                "mit?"
+            ],
+            "description": "Composer file for PhUML.",
+            "time": "2016-05-18 20:16:48"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -2586,7 +2616,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "tan-tan-kanarek/github-php-client": 20
+        "tan-tan-kanarek/github-php-client": 20,
+        "phuml": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

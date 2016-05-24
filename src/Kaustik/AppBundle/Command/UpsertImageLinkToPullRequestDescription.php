@@ -2,6 +2,7 @@
 
 namespace Kaustik\AppBundle\Command;
 
+use GitHubClientException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -55,7 +56,7 @@ class UpsertImageLinkToPullRequestDescription extends Command
                 null,
                 $body
             );
-        } catch (\GitHubClientException $e) {
+        } catch (GitHubClientException $e) {
             echo $e->getMessage();
             echo $e->getCode();
         }
