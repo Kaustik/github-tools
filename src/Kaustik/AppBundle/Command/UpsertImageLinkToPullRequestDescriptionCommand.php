@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpsertImageLinkToPullRequestDescription extends Command
+class UpsertImageLinkToPullRequestDescriptionCommand extends Command
 {
     protected function configure()
     {

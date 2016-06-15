@@ -2,7 +2,7 @@
 
 namespace Test;
 
-use Kaustik\AppBundle\Command\UpsertImageLinkToPullRequestDescription;
+use Kaustik\AppBundle\Command\UpsertImageLinkToPullRequestDescriptionCommand;
 
 class UpsertImageTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,7 +14,7 @@ Github pull request
 test
 EOD;
         $url = 'https://example.com/test-uml/456.png';
-        $actualNewBody = UpsertImageLinkToPullRequestDescription::getNewBody($body, $url);
+        $actualNewBody = UpsertImageLinkToPullRequestDescriptionCommand::getNewBody($body, $url);
         $expecedNewBody = <<<EOD
 Github pull request
 ![uml](https://example.com/test-uml/456.png)
@@ -27,7 +27,7 @@ EOD;
     {
         $body = "Github pull request";
         $url = 'https://example.com/test-uml/123.png';
-        $actualNewBody = UpsertImageLinkToPullRequestDescription::getNewBody($body, $url);
+        $actualNewBody = UpsertImageLinkToPullRequestDescriptionCommand::getNewBody($body, $url);
         $expecedNewBody = <<<EOD
 Github pull request
 ![uml](https://example.com/test-uml/123.png)
@@ -44,7 +44,7 @@ Github pull request
 test
 EOD;
         $url = 'https://example.com/test-uml/456.png';
-        $actualNewBody = UpsertImageLinkToPullRequestDescription::getNewBody($body, $url);
+        $actualNewBody = UpsertImageLinkToPullRequestDescriptionCommand::getNewBody($body, $url);
         $expecedNewBody = <<<EOD
 Github pull request
 ![test](https://example.com/foo.png)

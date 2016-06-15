@@ -13,12 +13,12 @@ require_once 'vendor/autoload.php';
 // import the Symfony Console Application 
 use Kaustik\AppBundle\Command\GetPrNumberForBranchCommand;
 use Kaustik\AppBundle\Command\GetPrStageForBranchCommand;
-use Kaustik\AppBundle\Command\UpsertImageLinkToPullRequestDescription;
+use Kaustik\AppBundle\Command\UpsertImageLinkToPullRequestDescriptionCommand;
 use Symfony\Component\Console\Application;
 
 $app = new Application();
 $app->add(
-    new UpsertImageLinkToPullRequestDescription(),
+    new UpsertImageLinkToPullRequestDescriptionCommand(),
     new GetPrNumberForBranchCommand(),
     new GetPrStageForBranchCommand()
 );
