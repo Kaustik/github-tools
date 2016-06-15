@@ -16,7 +16,7 @@
   "require": {
     "symfony/framework-bundle": "~2.3|~3.0",
     "tan-tan-kanarek/github-php-client" : "dev-master",
-    "symfony/console": "3.*",
+    "symfony/console": "2.*|3.*",
     "PhUML": "dev-master"
   },
   "require-dev": {
