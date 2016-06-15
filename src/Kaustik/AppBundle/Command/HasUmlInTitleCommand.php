@@ -3,18 +3,17 @@
 namespace Kaustik\AppBundle\Command;
 
 use GitHubClient;
-use GitHubClientException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class UpsertImageLinkToPullRequestDescriptionCommand extends Command
+class HasUmlInTitleCommand extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('github-tools:upsertimageinpullrequest')
+            ->setName('github-tools:hasumlintitle')
             ->addArgument(
                 'pullrequestnumber',
                 InputArgument::REQUIRED,
@@ -25,21 +24,15 @@ class UpsertImageLinkToPullRequestDescriptionCommand extends Command
                 InputArgument::REQUIRED,
                 'github token'
             )
-            ->addArgument(
-                'image-url',
-                InputArgument::REQUIRED,
-                'github token'
-            )
             ->setDescription(
-                'set image link'
+                'return 0 if #uml exist in pull request title, 1 otherwise'
             );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $pullrequestnumber = $input->getArgument('pullrequestnumber');
         $token = $input->getArgument('token');
-        $imageUrl = $input->getArgument('image-url');
+        $pullrequestnumber = $input->getArgument('pullrequestnumber');
         $client = new GitHubClient();
         $owner = 'kaustik';
         $repo = 'aiai';
@@ -47,30 +40,11 @@ class UpsertImageLinkToPullRequestDescriptionCommand extends Command
         $client->setOauthKey($token);
         $client->setDebug(false);
         $pullRequest = $client->pulls->getSinglePullRequest($owner, $repo, $pullrequestnumber);
-        $body = self::getNewBody($pullRequest->getBody(), $imageUrl);
-        try {
-            $client->pulls->updatePullRequest(
-                $owner,
-                $repo,
-                $pullrequestnumber,
-                null,
-                null,
-                $body
-            );
-        } catch (GitHubClientException $e) {
-            echo $e->getMessage();
-            echo $e->getCode();
-        }
-    }
 
-    public static function getNewBody($body, $imageUrl)
-    {
-        if (strstr($body, '[uml]')) {
-            $newBody = preg_replace('/\[uml]\((.*)\)/', "[uml](${imageUrl})", $body);
+        if (strstr($pullRequest->getTitle(), '#uml')) {
+            return 0;
         } else {
-            $newBody = "${body}\n[uml](${imageUrl})";
+            return 1;
         }
-
-        return $newBody;
     }
 }
