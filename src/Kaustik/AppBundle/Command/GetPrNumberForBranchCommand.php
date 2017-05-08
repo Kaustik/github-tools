@@ -65,6 +65,10 @@ class GetPrNumberForBranchCommand extends Command
             throw new Exception("Github error: {$pullRequestList->message}");
         }
 
+        if ($pullRequestList === null) {
+            throw new Exception("List is null");
+        }
+
         foreach ($pullRequestList as $pullRequest) {
             $pullRequestBranch = $pullRequest->head->ref;
             if ($pullRequestBranch == $currentBranch) {
