@@ -16,6 +16,17 @@ class GetPrStageForBranchCommand extends Command
      */
     private $availableStages;
 
+    public function __construct()
+    {
+        // must be in this order. otherwise code find #pr1 instead of #pr10, for example
+        $this->availableStages = [
+            '#pr10', '#pr11', '#pr12', '#pr13', '#pr14', '#pr15, #pr16, #pr17, #pr18, #pr19, #pr20',
+            '#pr1', '#pr2', '#pr3', '#pr4', '#pr5', '#pr6', '#pr7', '#pr8', '#pr9', '#pr10',
+            '#staging', '#prstordb',
+        ];
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
@@ -46,7 +57,7 @@ class GetPrStageForBranchCommand extends Command
 
             return 1;
         }
-        $this->availableStages = ['#pr1', '#pr2', '#pr3', '#pr4', '#pr5', '#pr6', '#pr7', '#prstordb', '#omsorg'];
+
         $stage = $this->getStageOrNullFromPullrequest($pullRequest);
         if ($stage) {
             $output->writeln($stage);
