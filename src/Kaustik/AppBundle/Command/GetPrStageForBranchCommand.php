@@ -20,7 +20,7 @@ class GetPrStageForBranchCommand extends Command
     {
         // must be in this order. otherwise code find #pr1 instead of #pr10, for example
         $this->availableStages = [
-            '#pr10', '#pr11', '#pr12', '#pr13', '#pr14', '#pr15, #pr16, #pr17, #pr18, #pr19, #pr20',
+            '#pr10', '#pr11', '#pr12', '#pr13', '#pr14', '#pr15', '#pr16', '#pr17', '#pr18', '#pr19', '#pr20',
             '#pr1', '#pr2', '#pr3', '#pr4', '#pr5', '#pr6', '#pr7', '#pr8', '#pr9', '#pr10',
             '#staging', '#prstordb',
         ];
