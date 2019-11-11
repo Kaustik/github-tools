@@ -56,7 +56,7 @@ class GetPrNumberForBranchCommand extends Command
      */
     public static function getPullRequestForBranch($currentBranch, $token)
     {
-        $command = "curl -H 'Authorization: token $token' ".
+        $command = "curl -s -H 'Authorization: token $token' ".
             'https://api.github.com/repos/kaustik/aiai/pulls';
         $jsonResult = `$command`;
         $pullRequestList = json_decode($jsonResult);
