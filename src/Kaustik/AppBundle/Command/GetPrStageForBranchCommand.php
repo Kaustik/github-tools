@@ -60,7 +60,7 @@ class GetPrStageForBranchCommand extends Command
 
         $stage = $this->getStageOrNullFromPullrequest($pullRequest);
         if ($stage) {
-            $output->writeln($stage);
+            $output->write($stage);
 
             return 0;
         }
