@@ -25,6 +25,11 @@ class GetPrNumberForBranchCommand extends Command
                 InputArgument::REQUIRED,
                 'github token'
             )
+            ->addArgument(
+                'repo',
+                InputArgument::OPTIONAL,
+                'name of repo'
+            )
             ->setDescription(
                 'Get Pull request number from github for a speficic branch'
             );
@@ -34,8 +39,10 @@ class GetPrNumberForBranchCommand extends Command
     {
         $token = $input->getArgument('token');
         $currentBranch = $input->getArgument('branch');
+        $repo = $input->getArgument('repo') ?? 'aiai';
+
         try {
-            $pullrequest = self::getPullRequestForBranch($currentBranch, $token);
+            $pullrequest = self::getPullRequestForBranch($currentBranch, $token, $repo);
         } catch (Exception $exception) {
             echo $exception->getMessage()."\n";
 
@@ -54,15 +61,16 @@ class GetPrNumberForBranchCommand extends Command
      *
      * @throws Exception
      */
-    public static function getPullRequestForBranch($currentBranch, $token)
+    public static function getPullRequestForBranch($currentBranch, $token, $repo)
     {
         $command = "curl -s -H 'Authorization: token $token' ".
-            'https://api.github.com/repos/kaustik/aiai/pulls';
+            "https://api.github.com/repos/kaustik/$repo/pulls";
+
         $jsonResult = `$command`;
         $pullRequestList = json_decode($jsonResult);
 
         if ($pullRequestList instanceof stdClass) {
-            throw new Exception("Github error: {$pullRequestList->message}");
+            throw new Exception("$command returned error: {$pullRequestList->message}");
         }
 
         if ($pullRequestList === null) {

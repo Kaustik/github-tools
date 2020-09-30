@@ -41,6 +41,11 @@ class GetPrStageForBranchCommand extends Command
                 InputArgument::REQUIRED,
                 'github token'
             )
+            ->addArgument(
+                'repo',
+                InputArgument::OPTIONAL,
+                'name of repo'
+            )
             ->setDescription(
                 'Get Pull request stage from github for a speficic branch, or emptry string if none exist'
             );
@@ -50,8 +55,10 @@ class GetPrStageForBranchCommand extends Command
     {
         $currentBranch = $input->getArgument('branch');
         $token = $input->getArgument('token');
+        $repo = $input->getArgument('repo') ?? 'aiai';
+
         try {
-            $pullRequest = GetPrNumberForBranchCommand::getPullRequestForBranch($currentBranch, $token);
+            $pullRequest = GetPrNumberForBranchCommand::getPullRequestForBranch($currentBranch, $token, $repo);
         } catch (Exception $exception) {
             echo $exception->getMessage()."\n";
 
